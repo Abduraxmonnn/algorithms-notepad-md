@@ -44,7 +44,7 @@ Explanation 3 (Eng) - [link](https://www.youtube.com/watch?v=73r3KWiEvyk)
 
 #### ==*Formula*==
 $$
-dp[i] = \max(dp[i - 1], \; nums[i] + dp[i - 2])
+dp[i] = \max(dp[i - 1], \; dp[i] + dp[i - 2])
 $$
 
 ### ==*UZB*==
