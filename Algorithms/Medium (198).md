@@ -40,7 +40,7 @@ Explanation 3 (Eng) - [link](https://www.youtube.com/watch?v=73r3KWiEvyk)
 
 ### ==Explanation on my words==
 
-![[house robber leetcode.jpg]] 
+![[house robber leetcode.jpg]]
 
 #### ==*Formula*==
 $$
@@ -62,12 +62,18 @@ Biza 2xil yo'l bilan uylarni o'g'irlashni boshlab olshimiz mumkin:
 ---
 Biza "bu uyni ogirlimizmi yoki yoq" sovoliga asoslanib har bir uyni aylanib chiqamiza!
 Boshida bizada 2ta ozgaruvchi va ikkalasida 0 qiymat boladi, bullar bizani `pointer`'larimiza, chunki biza hali hech qaysi uyni o'g'irlamadik.
-init dp: `dp = [5, 3, 10, 10, 15, 7, 20]
+- init dp: 
+```
+dp = [5, 3, 10, 10, 15, 7, 20]
+```
 
-2ta o'zgaruvchilar bilan hosil bo'lgan list (ikkita 0 larni ignore qilib yugirishi boshlimiza) -> `dp = [0, 0, 5, 3, 10, 10, 15, 7, 20]`
+2ta o'zgaruvchilar bilan hosil bo'lgan list (ikkita 0 larni ignore qilib yugirishi boshlimiza):
+```
+dp = [0, 0, 5, 3, 10, 10, 15, 7, 20]  # with 2 pointers
+```
 
 ==`1-tekshirish`== --> Biza  0 `dp[i-1]` qiymatga ega uyni o'g'irlaymizmi yoki 5 + 0 `dp[i-2] + dp[i]` qiymatli ? 
-	Albatta ==5 + 0== `dp[i-2] + dp[i]`
+	Albatta ==5 + 0== ==`dp[i-2] + dp[i]`==
 - updated: `dp = [0, 0, ^5, 3, 10, 10, 15, 7, 20]`
 
 > Kotta qiymatni (o'g'irlaydigan uyimiz qiymatini) `dp[i]` ga qoyib ketamiza, shunda ohirida `list` dagi ohirgi qiymat bizning javob boladi
@@ -76,8 +82,8 @@ init dp: `dp = [5, 3, 10, 10, 15, 7, 20]
 	Albatta ==5 + 0== `dp[i-2] + dp[i]`
 - updated: `dp = [0, 0, 5, ^5, 10, 10, 15, 7, 20]`
 
-==`3-tekshirish`== --> Biza  5 `dp[i-1]` qiymatga ega uyni o'g'irlaymizmi yoki 10 + 5 `dp[i-2] + dp[i]` qiymatli ? 
-	Albatta ==10 + 5== `dp[i-2] + dp[i]`
+==`3-tekshirish`== --> Biza  5 `dp[i-1]` qiymatga ega uyni o'g'irlaymizmi yoki 5 + 10 `dp[i-2] + dp[i]` qiymatli ? 
+	Albatta ==5 + 10== `dp[i-2] + dp[i]`
 * updated: `dp = [0, 0, 5, 5, ^15, 10, 15, 7, 20]`
 
 ==`4-tekshirish`== --> Biza  15 `dp[i-1]` qiymatga ega uyni o'g'irlaymizmi yoki 10 + 5 `dp[i-2] + dp[i]` qiymatli ? 
@@ -93,9 +99,56 @@ Va hakozo...
 > Aslida hammasidayam tepadaka `[0, 0, 5, 5, 15, 15]` bita qiymatadan 2tadan bolmaydi, shunchaki shu misolda shunday bo'lib qoldi.
 
 ### ==*ENG*==
+We create 2 pointers to save `last element` and `before last element` (or `last element -1`). We will only work with these pointers.
+
+---
+We can start robbing houses in 2 approaches.
+![[Pasted image 20250928155448.png]]
+1) Get start first element of List and total value of sub-array of it which starts with third element after skipping second element. (blue color)
+2) Or get start ignoring first element of list and get total value of sub-array which start from second element. (green color) 
+
+---
+We always need to get answer to the question - "We rob this house or not ?" -> and get house which corresponds to the answer "We will get more profit (value) from this house, if we will rob it!".
+First thing first, We add double 0 at the start of the initial list `dp` as a pointers because so far not a single house has been robbed.
+- init dp: 
+```
+dp = [5, 3, 10, 10, 15, 7, 20]
+```
+
+After adding 2 pointers our list will change to (We will ignore these 2 pointers once the process starts):
+```
+dp = [0, 0, 5, 3, 10, 10, 15, 7, 20]  # with 2 pointers
+```
+
+==_Note:_== We will try to get answer to our question above in every steps
+==_Note:_== " ^ " on the dp list means where we are and what value we chagned.
+
+==`1-step`== --> Are we rob house with value 0 `dp[i-1]` or rob house with 5 + 0 `dp[i-2] + dp[i]` ?
+	Obviously ==5 + 0== ==`dp[i-2] + dp[i]`==
+- updated: `dp = [0, 0, ^5, 3, 10, 10, 15, 7, 20]`
+
+> After finding bigger value to rob, We will update the `dp[i]`. After all, as a result, we simply get the last element of the list, which always preserves our maximum value from which we received by robbing the house.
+
+==`2-step`== --> Are we rob house with value 0 `dp[i-1]` or  5 + 0 `dp[i-2] + dp[i]` ?
+	Obviously ==5 + 0== ==`dp[i-2] + dp[i]`==
+- updated: `dp = [0, 0, 5, ^5, 10, 10, 15, 7, 20]`
+
+==`3-step`== --> Are we rob house with value 5 `dp[i-1]` or  5 + 10 `dp[i-2] + dp[i]` ?
+	Obviously ==5 + 10== ==`dp[i-2] + dp[i]`==
+- updated: `dp = [0, 0, 5, 5, ^15, 10, 15, 7, 20]`
+
+==`4-step`== --> Are we rob house with value 15 `dp[i-1]` or  5 + 10 `dp[i-2] + dp[i]` ?
+	Obviously ==5 + 10== ==`dp[i-2] + dp[i]`==
+- updated: `dp = [0, 0, 5, 5, 15, ^15, 15, 7, 20]`
+
+==`5-step`== --> Are we rob house with value 15 `dp[i-1]` or  15 + 15 `dp[i-2] + dp[i]` ?
+	Obviously ==15 + 15 ==`dp[i-2] + dp[i]`==
+- updated: `dp = [0, 0, 5, 5, 15, 15, ^30, 7, 20]`
+
+and so on ....
+
+> Actually, We can get other list, not like above list (every 2 element in row will be same). This just happens like that in example.
 
 
-
-![[PXL_20250927_100837057 1.jpg]]
-
-[^1]: 
+---
+![[PXL_20250927_100837057.jpg]]
