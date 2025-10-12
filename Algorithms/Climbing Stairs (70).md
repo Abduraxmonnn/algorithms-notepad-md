@@ -1,4 +1,4 @@
-Climbing Stairs Question [link](https://leetcode.com/problems/climbing-stairs/) from [[Leetcode]]
+==Easy== Question [link](https://leetcode.com/problems/climbing-stairs/) from [[Leetcode]]
 
 ### ==**Code:**==
 

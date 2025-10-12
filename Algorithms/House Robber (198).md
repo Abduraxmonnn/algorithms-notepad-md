@@ -1,4 +1,4 @@
-House Robber Question [link](https://leetcode.com/problems/house-robber/) from [[Leetcode]]
+==Medium== Question [link](https://leetcode.com/problems/house-robber/) from [[Leetcode]]
 
 ### ==**Code:**==
 
@@ -52,7 +52,7 @@ Biza 2ta pointer yaratamiza `last element` va `before last element` (yoki `last 
 
 ---
 Biza 2xil yo'l bilan uylarni o'g'irlashni boshlab olshimiz mumkin:
-![[Pasted image 20250928155448.png]]
+
 1) List'dagi 1-elementdan boshlimza, 2-element ignore qilib (chunki o'g'irlomimza) undan keyingi barcha uylarni o'g'irlashimiza mumkin (ko'k rang)
 	dp = [1, ~~2~~, 3, 1, 3, 4]
 2) Yoki List'dagi 1-elementni ignore qilib 2-element va undan keyingi barcha uylarni  o'g'irlashimza mumkin (yashil rang)

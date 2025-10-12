@@ -1,4 +1,4 @@
-"Best Time to Buy and Sell Stock" Question [link](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/?envType=problem-list-v2&envId=dynamic-programming) from [[Leetcode]]
+==Easy== Question [link](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/?envType=problem-list-v2&envId=dynamic-programming) from [[Leetcode]]
 
 ### ==**Code:**==
 
@@ -11,7 +11,7 @@ class Solution:
 		profit = 0
 
 		for i in range(len(prices)):  # <-- runs through prices list
-			if prices[i] < buy_price:  # <-- smallest but_price
+			if prices[i] < buy_price:  # <-- smallest buy_price
 				buy_price = prices[i]
 			else:  # current price smallest than current, to reach more profit
 				tmp_profit = prices[i] - buy_price  # potential profitable deal

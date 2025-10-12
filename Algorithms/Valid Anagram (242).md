@@ -1,4 +1,4 @@
-Valid Anagram Question [link](https://leetcode.com/problems/valid-anagram/) from [[Leetcode]]
+==Easy== Question [link](https://leetcode.com/problems/valid-anagram/) from [[Leetcode]]
 
 ### ==**Code:**==
 1) ==**O(N)**== (simple approach)
